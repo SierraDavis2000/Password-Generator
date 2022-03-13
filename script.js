@@ -5,7 +5,7 @@ var generateBtn = document.querySelector("#generate");
 var lowercase = "abcdefghijklmnopqrstuvwxyz";
 var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numeric = "0123456789";
-var special = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+var special = "!#$%&'()*+,-./:;<=>?@[^_`{|}~";
 
 
 function generatePassword(){
@@ -27,22 +27,22 @@ function generatePassword(){
   var allowed = {};
   var lowercaseChoice = confirm ("Would you like your password to include lowercase letters?")
   if(lowercaseChoice){
-    passwordChar += rando(allowed.lowercase)
+    passwordChar += lowercase;
   }
 
   var uppercaseChoice = confirm ("Would you like your password to include uppercase letters?")
   if(uppercaseChoice){
-    passwordChar += rando(allowed.uppercase)
+    passwordChar += uppercase;
   }
 
   var numericChoice = confirm ("Would you like your password to include numerical characters?")
   if(numericChoice){
-    passwordChar += rando(allowed.numeric)
+    passwordChar += numeric
   }
 
   var specialChoice = confirm ("Would you like your password to include special characters?")
   if(specialChoice){
-    passwordChar += rando(allowed.special)
+    passwordChar += special;
   }
 
   while (!lowercaseChoice && !uppercaseChoice && !numericChoice && !specialChoice) {
@@ -50,11 +50,9 @@ function generatePassword(){
     return ""
   }
 
-  for (var i = passwordChar.length;  i < length; i++){
-    passwordChar += rando(rando(allowed).value)
+  for (let i = 0;  i < length; i++){
+    password += passwordChar[Math.floor(Math.random() * passwordChar.length)]
   }
-
-  document.getElementById("password").value = randoSequence(passwordChar).join("");
   return password
 }
 
@@ -63,6 +61,7 @@ function generatePassword(){
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
+  
   passwordText.value = password;
 
 }
