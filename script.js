@@ -9,6 +9,9 @@ var special = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 
 
 function generatePassword(){
+  var passwordChar = ""
+
+  // password length
   var length = prompt("Please select the length of your password. Must be between 8 and 128 characters")
   length = parseInt(length);
   if (length < 8) {
@@ -19,8 +22,28 @@ function generatePassword(){
     alert("Password must be less than 128 characters!");
     return"";
   }
+  // password elements
+  var lowercaseChoice = confirm ("Would you like your password to include lowercase letters?")
+  if(lowercaseChoice){
+    passwordChar += lowercase
+  }
 
-  var charType = prompt ("Please select ")
+  var uppercaseChoice = confirm ("Would you like your password to include uppercase letters?")
+  if(uppercaseChoice){
+    passwordChar += uppercase
+  }
+
+  var numericChoice = confirm ("Would you like your password to include numerical characters?")
+  if(numericChoice){
+    passwordChar += numeric
+  }
+
+  var specialChoice = confirm ("Would you like your password to include special characters?")
+  if(specialChoice){
+    passwordChar += special
+  }
+
+  
 }
 
 
