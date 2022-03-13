@@ -9,6 +9,7 @@ var special = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 
 
 function generatePassword(){
+  var password = ""
   var passwordChar = ""
 
   // password length
@@ -23,27 +24,38 @@ function generatePassword(){
     return"";
   }
   // password elements
+  var allowed = {};
   var lowercaseChoice = confirm ("Would you like your password to include lowercase letters?")
   if(lowercaseChoice){
-    passwordChar += lowercase
+    passwordChar += rando(allowed.lowercase)
   }
 
   var uppercaseChoice = confirm ("Would you like your password to include uppercase letters?")
   if(uppercaseChoice){
-    passwordChar += uppercase
+    passwordChar += rando(allowed.uppercase)
   }
 
   var numericChoice = confirm ("Would you like your password to include numerical characters?")
   if(numericChoice){
-    passwordChar += numeric
+    passwordChar += rando(allowed.numeric)
   }
 
   var specialChoice = confirm ("Would you like your password to include special characters?")
   if(specialChoice){
-    passwordChar += special
+    passwordChar += rando(allowed.special)
   }
 
-  
+  while (!lowercaseChoice && !uppercaseChoice && !numericChoice && !specialChoice) {
+    alert("You must select at least one character type!");
+    return ""
+  }
+
+  for (var i = passwordChar.length;  i < length; i++){
+    passwordChar += rando(rando(allowed).value)
+  }
+
+  document.getElementById("password").value = randoSequence(passwordChar).join("");
+  return password
 }
 
 
